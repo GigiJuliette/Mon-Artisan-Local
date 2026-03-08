@@ -1,10 +1,11 @@
-import { LoginForm } from "@/components/lib/Forms/LoginForm";
+import { RegisterForm } from "@/components/lib/Forms/RegisterForm";
 import gradiant from "../assets/gradiant.png";
-export const Login = () => {
+
+export const Register = () => {
   return (
     <div className="relative overflow-hidden h-screen">
       <div className="w-full md:w-[70%] lg:w-[40%] absolute h-full z-2 bg-background grid place-items-center">
-        <LoginForm />
+        <RegisterForm />
       </div>
       <img src={gradiant} className="absolute h-full w-full top-0 h-0" />
     </div>
