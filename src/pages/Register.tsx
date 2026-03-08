@@ -1,4 +1,4 @@
-import { RegisterForm } from "@/components/lib/Forms/RegisterForm";
+import { RegisterForm } from "@/components/custom/Forms/RegisterForm";
 import gradiant from "../assets/gradiant.png";
 
 export const Register = () => {

@@ -1,7 +1,9 @@
+import { Logo } from "@/components/custom/Logo";
+
 export const Home = () => {
   return (
     <>
-      <p>eibkfjnefoeknf hellooooo world</p>
+      <Logo />
     </>
   );
 };
