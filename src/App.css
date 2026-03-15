@@ -5,6 +5,8 @@
 }
 body {
   background-color: var(--background);
-  color: var(--primary-text);
   font-family: "Rethink Sans", sans-serif;
+}
+a {
+  text-decoration: none;
 }

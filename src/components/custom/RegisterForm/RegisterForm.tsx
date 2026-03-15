@@ -13,7 +13,7 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { authService } from "@/services/authService";
 import { registerFormSchema } from "./zodSchema";
 import type { RegisterValues } from "./zodSchema";
-import { useRegisterFetch } from "@/hooks/useRegisterfetch";
+import { useRegisterFetch } from "@/components/custom/RegisterForm/useRegisterfetch";
 import { Link } from "react-router-dom";
 
 export const RegisterForm = () => {

@@ -17,7 +17,7 @@ export function useFetch<Data>(fetchFn: () => Promise<Data>) {
         err.status === 403 ||
         err.message === "No token found"
       ) {
-        navigate("/authentication");
+        navigate("/login");
       }
     } finally {
       setLoading(false);

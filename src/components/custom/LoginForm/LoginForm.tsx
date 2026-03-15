@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { useLoginFetch } from "@/hooks/useLoginFetch";
+import { useLoginFetch } from "@/components/custom/LoginForm/useLoginFetch";
 import { authService } from "@/services/authService";
 import { loginFormSchema } from "./zodSchema";
 import type { LoginValues } from "./zodSchema";
