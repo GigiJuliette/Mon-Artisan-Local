@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { useSearchListings } from "@/hooks/useSearchListings";
 import { SearchInput } from "@/components/custom/SearchInput/SearchInput";
-import { Flower } from "@/components/custom/Flower/Flower";
 import { ArtisanCard } from "@/components/custom/ArtisansCard/ArtisanCard";
 import { Nav } from "@/components/custom/Nav/Nav";
 const example = [
