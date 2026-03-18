@@ -2,21 +2,16 @@ import { useEffect, useState } from "react";
 
 import { searchListings } from "@/services/listingService";
 import type { Listing } from "@/types/Listing";
+import type { Coordinates } from "@/hooks/useGeolocation";
 
-type SearchResult = {
-  count: number;
-  query: string;
-  listings: Listing[];
-};
-
-export const useSearchListings = (query: string) => {
-  const [results, setResults] = useState<SearchResult | null>(null);
+export const useSearchListings = (query: string, coordinates?: Coordinates | null) => {
+  const [results, setResults] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!query.trim()) {
-      setResults(null);
+      setResults([]);
       return;
     }
 
@@ -24,17 +19,18 @@ export const useSearchListings = (query: string) => {
       setLoading(true);
       setError(null);
       try {
-        const data = await searchListings(query);
-        setResults(data);
+        const data = await searchListings(query, coordinates || undefined);
+        setResults(Array.isArray(data) ? data : []);
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : "Erreur inattendue");
+        setResults([]);
       } finally {
         setLoading(false);
       }
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [query]);
+  }, [query, coordinates]);
 
   return { results, loading, error };
 };
