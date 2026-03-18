@@ -3,14 +3,20 @@ import { useEffect, useState } from "react";
 import { searchListings } from "@/services/listingService";
 import type { Listing } from "@/types/Listing";
 
+type SearchResult = {
+  count: number;
+  query: string;
+  listings: Listing[];
+};
+
 export const useSearchListings = (query: string) => {
-  const [results, setResults] = useState<Listing[] | null>(null);
+  const [results, setResults] = useState<SearchResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!query.trim()) {
-      setResults([]);
+      setResults(null);
       return;
     }
 

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-export function useRegisterFetch<T, R>(fetchFn: (payload: T) => Promise<R>) {
+export function useRegisterFetch<T, R>(
+  fetchFn: (payload: T) => Promise<R & { token: string }>,
+) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
@@ -10,8 +12,9 @@ export function useRegisterFetch<T, R>(fetchFn: (payload: T) => Promise<R>) {
     try {
       setLoading(true);
       setError("");
-      await fetchFn(payload);
-      navigate("/login");
+      const result = await fetchFn(payload);
+      localStorage.setItem("token", result.token);
+      navigate("/");
     } catch (err: any) {
       setError(err.message || "Une erreur est survenue");
     } finally {
