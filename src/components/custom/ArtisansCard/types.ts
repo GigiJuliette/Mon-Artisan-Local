@@ -1,5 +1,5 @@
-import type { Listing } from "@/types/Listing";
+import type { ListingData } from "@/types/Listing";
 
 export type ArtisanCardProps = {
-  data: Listing;
+  data: ListingData;
 };

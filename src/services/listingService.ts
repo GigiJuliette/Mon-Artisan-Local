@@ -1,4 +1,4 @@
-import type { Listing, ListingData } from "../types/Listing";
+import type { ListingData } from "../types/Listing";
 import type { Coordinates } from "../hooks/useGeolocation";
 
 import { handleResponse } from "./utils/handleResponse";
@@ -24,7 +24,7 @@ interface listingResponse {
 export const searchListings = async (
   query: string,
   coordinates?: Coordinates,
-): Promise<Listing[]> => {
+): Promise<ListingData[]> => {
   const params = new URLSearchParams({ q: query });
 
   if (coordinates) {
@@ -36,7 +36,7 @@ export const searchListings = async (
   const data: SearchResponse = await handleResponse(response);
 
   // Extract the listings array and wrap each in the expected format
-  return data.listings.map((listing) => ({ listing }));
+  return data.listings;
 };
 
 export const createListing = async (
