@@ -20,17 +20,8 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { formatDistance } from "@/lib/distance";
 
 export function ArtisanCard({ data }: ArtisanCardProps) {
-  const {
-    listing: {
-      title,
-      description,
-      distance,
-      address,
-      city,
-      user,
-      specialities,
-    },
-  } = data;
+  const { title, description, distance, address, city, user, specialities } =
+    data;
 
   const mailto = `mailto:${user.email}`;
   const telto = user.phone ? `tel:${user.phone}` : undefined;

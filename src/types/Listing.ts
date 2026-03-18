@@ -27,7 +27,3 @@ export interface ListingData {
   longitude: string | null;
   distance?: number | string;
 }
-
-export interface Listing {
-  listing: ListingData;
-}

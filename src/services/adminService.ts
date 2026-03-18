@@ -1,11 +1,11 @@
-import type { Listing } from "../types/Listing";
+import type { ListingData } from "../types/Listing";
 
 import authFetch from "./utils/authFetch";
 import { handleResponse } from "./utils/handleResponse";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-export const getPendingListings = async (): Promise<Listing[]> => {
+export const getPendingListings = async (): Promise<ListingData[]> => {
   const response = await authFetch(`${VITE_API_URL}/admin/listings/pending`);
   return handleResponse(response);
 };

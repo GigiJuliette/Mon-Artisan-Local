@@ -62,7 +62,7 @@ export const Home = () => {
           results.length === 0 && <p>Aucun résultat.</p>}
         {Array.isArray(results) &&
           results.map((listing) => (
-            <ArtisanCard key={listing.listing.id} data={listing} />
+            <ArtisanCard key={listing.id} data={listing} />
           ))}
       </main>
     </>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { searchListings } from "@/services/listingService";
-import type { Listing } from "@/types/Listing";
+import type { ListingData } from "@/types/Listing";
 import type { Coordinates } from "@/hooks/useGeolocation";
 
 export const useSearchListings = (query: string, coordinates?: Coordinates | null) => {
-  const [results, setResults] = useState<Listing[]>([]);
+  const [results, setResults] = useState<ListingData[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,7 +20,7 @@ export const useSearchListings = (query: string, coordinates?: Coordinates | nul
       setError(null);
       try {
         const data = await searchListings(query, coordinates || undefined);
-        setResults(Array.isArray(data) ? data : []);
+        setResults(data);
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : "Erreur inattendue");
         setResults([]);
