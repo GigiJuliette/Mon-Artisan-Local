@@ -13,11 +13,11 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { authService } from "@/services/authService";
 import { registerFormSchema } from "./zodSchema";
 import type { RegisterValues } from "./zodSchema";
-import { useRegisterFetch } from "@/components/custom/RegisterForm/useRegisterfetch";
+import { useAuthHandler } from "@/hooks/authHandler";
 import { Link } from "react-router-dom";
 
 export const RegisterForm = () => {
-  const { register, loading, error } = useRegisterFetch(authService.register);
+  const { submit, loading, error } = useAuthHandler(authService.register);
 
   const form = useForm<RegisterValues>({
     resolver: zodResolver(registerFormSchema),
@@ -30,7 +30,7 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = async (data: RegisterValues) => {
-    await register(data);
+    await submit(data);
   };
 
   if (loading) return <p>Loading...</p>;

@@ -9,14 +9,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { useLoginFetch } from "@/components/custom/LoginForm/useLoginFetch";
+import { useAuthHandler } from "@/hooks/authHandler";
 import { authService } from "@/services/authService";
 import { loginFormSchema } from "./zodSchema";
 import type { LoginValues } from "./zodSchema";
 import { Link } from "react-router";
 
 export const LoginForm = () => {
-  const { login, loading, error } = useLoginFetch(authService.login);
+  const { submit, loading, error } = useAuthHandler(authService.login);
 
   const form = useForm<LoginValues>({
     resolver: zodResolver(loginFormSchema),
@@ -27,7 +27,7 @@ export const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginValues) => {
-    await login(data);
+    await submit(data);
   };
 
   if (loading) return <p>Loading...</p>;
