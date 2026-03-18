@@ -4,7 +4,7 @@ import { searchListings } from "@/services/listingService";
 import type { Listing } from "@/types/Listing";
 
 export const useSearchListings = (query: string) => {
-  const [results, setResults] = useState<Listing[]>([]);
+  const [results, setResults] = useState<Listing[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

@@ -45,7 +45,9 @@ export const Home = () => {
         <SearchInput query={query} setQuery={setQuery} />
         {loading && <p>Chargement...</p>}
         {error && <p>{error}</p>}
-        {!loading && !error && results.length === 0 && <p>Aucun résultat.</p>}
+        {results !== null && !loading && !error && results.length === 0 && (
+          <p>Aucun résultat.</p>
+        )}
         {example.map((listing) => (
           <ArtisanCard key={listing.listing.id} data={listing} />
         ))}

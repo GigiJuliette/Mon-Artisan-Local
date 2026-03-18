@@ -22,8 +22,8 @@ export const RegisterForm = () => {
   const form = useForm<RegisterValues>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
-      name: "",
-      surname: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
     },
@@ -51,7 +51,7 @@ export const RegisterForm = () => {
         className="p-4 flex flex-col gap-4"
       >
         <Controller
-          name="name"
+          name="firstName"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
@@ -70,7 +70,7 @@ export const RegisterForm = () => {
           )}
         />
         <Controller
-          name="surname"
+          name="lastName"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
