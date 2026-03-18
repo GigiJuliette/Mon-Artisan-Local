@@ -1,6 +1,14 @@
+export type UserRole = "admin" | "artisan" | null;
+
 export interface User {
-  name: string;
-  surname: string;
-  password: string;
+  id: number;
   email: string;
+  firstName: string;
+  lastName: string;
+  role: Exclude<UserRole, null>;
+  phone: string | null;
+  address: string | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
