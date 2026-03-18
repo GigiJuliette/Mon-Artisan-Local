@@ -17,10 +17,19 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { formatDistance } from "@/lib/distance";
 
 export function ArtisanCard({ data }: ArtisanCardProps) {
   const {
-    listing: { title, description, address, city, user, specialities },
+    listing: {
+      title,
+      description,
+      distance,
+      address,
+      city,
+      user,
+      specialities,
+    },
   } = data;
 
   const mailto = `mailto:${user.email}`;
@@ -30,7 +39,14 @@ export function ArtisanCard({ data }: ArtisanCardProps) {
   return (
     <Card size="default" className="w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <div className="flex items-start justify-between gap-2">
+          <CardTitle>{title}</CardTitle>
+          {distance !== null && distance !== undefined && (
+            <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">
+              {formatDistance(distance)}
+            </span>
+          )}
+        </div>
         <CardDescription>
           <p className="mt-2 text-sm text-muted-foreground">
             {specialities?.map((s) => s.name).join(", ")}
