@@ -3,20 +3,76 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { Search } from "lucide-react";
+import { Search, MapPin, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import type { SearchInputProps } from "./types";
 
-export const SearchInput = ({ query, setQuery }: SearchInputProps) => {
+export const SearchInput = ({
+  query,
+  setQuery,
+  onLocationSearch,
+  locationLoading = false,
+  permissionState = "prompt",
+  isLocationActive = false,
+}: SearchInputProps) => {
+  const getButtonVariant = () => {
+    if (isLocationActive) {
+      return "default"; // Active state - filled button
+    }
+
+    switch (permissionState) {
+      case "denied":
+        return "destructive";
+      default:
+        return "outline";
+    }
+  };
+
+  const getButtonTitle = () => {
+    if (isLocationActive) {
+      return "Using your location - click to disable";
+    }
+
+    switch (permissionState) {
+      case "granted":
+        return "Click to search around you";
+      case "denied":
+        return "Location access denied - click to try again";
+      case "unsupported":
+        return "Geolocation not supported by your browser";
+      default:
+        return "Click to allow location access";
+    }
+  };
+
   return (
-    <InputGroup className="max-w-xs">
-      <InputGroupInput
-        placeholder="Search..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <InputGroupAddon>
-        <Search />
-      </InputGroupAddon>
-    </InputGroup>
+    <div className="flex gap-2 items-center">
+      <InputGroup className="max-w-xs">
+        <InputGroupInput
+          placeholder="Search..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <InputGroupAddon>
+          <Search />
+        </InputGroupAddon>
+      </InputGroup>
+      {onLocationSearch && (
+        <Button
+          onClick={onLocationSearch}
+          disabled={locationLoading || permissionState === "unsupported"}
+          variant={getButtonVariant()}
+          className={`flex items-center gap-2 ${permissionState === "denied" ? "line-through" : ""}`}
+          title={getButtonTitle()}
+        >
+          {locationLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <MapPin className="h-4 w-4" />
+          )}
+          Around me
+        </Button>
+      )}
+    </div>
   );
 };

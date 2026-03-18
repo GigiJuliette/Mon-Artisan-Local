@@ -23,6 +23,9 @@ export interface ListingData {
   specialities: ListingSpeciality[];
   address: string;
   city: string;
+  latitude: string | null;
+  longitude: string | null;
+  distance?: number | string;
 }
 
 export interface Listing {
