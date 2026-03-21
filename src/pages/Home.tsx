@@ -6,7 +6,6 @@ import { useGeolocation } from "@/hooks/useGeolocation";
 import type { Coordinates } from "@/hooks/useGeolocation";
 import { SearchInput } from "@/components/custom/SearchInput/SearchInput";
 import { ArtisanCard } from "@/components/custom/ArtisansCard/ArtisanCard";
-import { Flower } from "lucide-react";
 
 export const Home = () => {
   const [query, setQuery] = useState("");
