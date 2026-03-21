@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Flower } from "../Flower/Flower";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router";
+import { ButtonGroup } from "@/components/ui/button-group";
 
 export const Nav = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -19,7 +20,7 @@ export const Nav = () => {
       <Logo />
       <Flower size={70} />
       {isAuthenticated ? (
-        <div className="flex items-center gap-2">
+        <ButtonGroup>
           <Button asChild variant="outline">
             <Link to="/create-annonce">Creer une annonce</Link>
           </Button>
@@ -29,7 +30,7 @@ export const Nav = () => {
           <Button type="button" variant="outline" onClick={handleLogout}>
             Se deconnecter
           </Button>
-        </div>
+        </ButtonGroup>
       ) : (
         <Button asChild variant="outline">
           <Link to="/login">Se connecter</Link>

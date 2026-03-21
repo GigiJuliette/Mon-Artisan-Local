@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
+import { Nav } from "@/components/custom/Nav/Nav";
 import { useSearchListings } from "@/hooks/useSearchListings";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import type { Coordinates } from "@/hooks/useGeolocation";
 import { SearchInput } from "@/components/custom/SearchInput/SearchInput";
 import { ArtisanCard } from "@/components/custom/ArtisansCard/ArtisanCard";
+import { Flower } from "lucide-react";
 
 export const Home = () => {
   const [query, setQuery] = useState("");
@@ -39,7 +41,8 @@ export const Home = () => {
 
   return (
     <>
-      <main>
+      <Nav />
+      <main className="p-6 flex flex-col items-center gap-20">
         <SearchInput
           query={query}
           setQuery={setQuery}
@@ -57,7 +60,9 @@ export const Home = () => {
           !locationLoading &&
           !error &&
           !locationError &&
-          results.length === 0 && <p>Aucun résultat.</p>}
+          results.length === 0 && (
+            <h1 className="text-lg">Découvrez les artisans autour de vous !</h1>
+          )}
         {Array.isArray(results) &&
           results.map((listing) => (
             <ArtisanCard key={listing.id} data={listing} />

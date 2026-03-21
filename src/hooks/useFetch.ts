@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 export function useFetch<Data>(fetchFn: () => Promise<Data>) {
@@ -6,27 +6,28 @@ export function useFetch<Data>(fetchFn: () => Promise<Data>) {
   const [data, setData] = useState<Data | undefined>();
   const [loading, setLoading] = useState(false);
 
-  const execute = async () => {
+  const execute = useCallback(async () => {
     try {
       setLoading(true);
       const result = await fetchFn();
       setData(result);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const error = err as { status?: number; message?: string };
       if (
-        err.status === 401 ||
-        err.status === 403 ||
-        err.message === "No token found"
+        error.status === 401 ||
+        error.status === 403 ||
+        error.message === "No token found"
       ) {
         navigate("/login");
       }
     } finally {
       setLoading(false);
     }
-  };
+  }, [fetchFn, navigate]);
 
   useEffect(() => {
     execute();
-  }, []);
+  }, [execute]);
 
   return { data, loading };
 }

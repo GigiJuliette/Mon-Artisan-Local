@@ -21,6 +21,27 @@ interface listingResponse {
   count: number;
   listing: ListingData[];
 }
+
+interface AdminAllListingsResponse {
+  count: number;
+  listings: ListingData[];
+}
+
+export interface UpdateListingAdminStatusPayload {
+  id: number;
+  status: "published" | "blocked";
+}
+
+export interface CreateListingPayload {
+  title: string;
+  description: string;
+  address: string;
+  city: string;
+  latitude: string;
+  longitude: string;
+  specialityIds: number[];
+}
+
 export const searchListings = async (
   query: string,
   coordinates?: Coordinates,
@@ -40,7 +61,7 @@ export const searchListings = async (
 };
 
 export const createListing = async (
-  payload: ListingData,
+  payload: CreateListingPayload,
 ): Promise<listingResponse> => {
   const response = await authFetch(`${VITE_API_URL}/listings`, {
     method: "POST",
@@ -50,9 +71,22 @@ export const createListing = async (
   return handleResponse(response);
 };
 
-export const getAllListingsForAdmin = async (): Promise<listingResponse> => {
-  const response = await authFetch(`${VITE_API_URL}/listings/admin/all`, {
-    method: "GET",
+export const getAllListingsForAdmin =
+  async (): Promise<AdminAllListingsResponse> => {
+    const response = await authFetch(`${VITE_API_URL}/listings/admin/all`, {
+      method: "GET",
+    });
+
+    return handleResponse(response);
+  };
+
+export const updateListingAdminStatus = async ({
+  id,
+  status,
+}: UpdateListingAdminStatusPayload): Promise<ListingData> => {
+  const response = await authFetch(`${VITE_API_URL}/listings/${id}/admin`, {
+    method: "PUT",
+    body: JSON.stringify({ status }),
   });
 
   return handleResponse(response);

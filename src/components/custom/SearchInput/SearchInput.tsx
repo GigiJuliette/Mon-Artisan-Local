@@ -17,9 +17,8 @@ export const SearchInput = ({
 }: SearchInputProps) => {
   const getButtonVariant = () => {
     if (isLocationActive) {
-      return "default"; // Active state - filled button
+      return "default";
     }
-
     switch (permissionState) {
       case "denied":
         return "destructive";
@@ -46,8 +45,8 @@ export const SearchInput = ({
   };
 
   return (
-    <div className="flex gap-2 items-center">
-      <InputGroup className="max-w-xs">
+    <div className="flex gap-2 items-center w-full max-w-lg">
+      <InputGroup className="w-full">
         <InputGroupInput
           placeholder="Search..."
           value={query}
@@ -70,7 +69,7 @@ export const SearchInput = ({
           ) : (
             <MapPin className="h-4 w-4" />
           )}
-          Around me
+          Autour de moi
         </Button>
       )}
     </div>
