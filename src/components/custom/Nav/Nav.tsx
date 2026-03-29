@@ -16,11 +16,13 @@ export const Nav = () => {
   };
 
   return (
-    <nav className="p-4 w-full flex justify-between mb-5 items-center">
+    <nav className="p-4 w-full mb-5 grid grid-cols-3 items-center">
       <Logo />
-      <Flower size={70} />
+      <div className="justify-self-center">
+        <Flower size={70} />
+      </div>
       {isAuthenticated ? (
-        <ButtonGroup>
+        <ButtonGroup className="justify-self-end">
           <Button asChild variant="outline">
             <Link to="/create-annonce">Creer une annonce</Link>
           </Button>

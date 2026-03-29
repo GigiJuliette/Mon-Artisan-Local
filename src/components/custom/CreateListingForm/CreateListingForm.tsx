@@ -32,6 +32,8 @@ export const CreateListingForm = () => {
       description: "",
       address: "",
       city: "",
+      phone: "",
+      email: "",
       latitude: "",
       longitude: "",
       specialityIds: [],
@@ -40,13 +42,10 @@ export const CreateListingForm = () => {
 
   const onSubmit = async (data: CreateListingValues) => {
     setSuccessMessage("");
-
     const result = await submit(data, "Impossible de creer l'annonce");
-
     if (!result) {
       return;
     }
-
     setSuccessMessage("Annonce creee avec succes");
     form.reset();
   };
@@ -141,6 +140,51 @@ export const CreateListingForm = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Controller
+            name="phone"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor="listing-phone">Téléphone</FieldLabel>
+                <Input
+                  {...field}
+                  id="listing-phone"
+                  type="tel"
+                  placeholder="06 12 34 56 78"
+                  aria-invalid={fieldState.invalid}
+                  disabled={form.formState.isSubmitting}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+
+          <Controller
+            name="email"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor="listing-email">Email</FieldLabel>
+                <Input
+                  {...field}
+                  id="listing-email"
+                  type="email"
+                  placeholder="email@exemple.com"
+                  aria-invalid={fieldState.invalid}
+                  disabled={form.formState.isSubmitting}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+        </div>
+
+        {/* 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Controller
             name="latitude"
             control={form.control}
             render={({ field, fieldState }) => (
@@ -182,13 +226,14 @@ export const CreateListingForm = () => {
             )}
           />
         </div>
+        */}
 
         <Controller
           name="specialityIds"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel>Specialites</FieldLabel>
+              <FieldLabel>Categories</FieldLabel>
               <div className="border rounded-lg p-3 flex flex-col gap-2">
                 {specialitiesLoading && (
                   <p className="text-sm text-muted-foreground">

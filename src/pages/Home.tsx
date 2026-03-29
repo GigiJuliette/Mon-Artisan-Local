@@ -41,7 +41,7 @@ export const Home = () => {
   return (
     <>
       <Nav />
-      <main className="p-6 flex flex-col items-center gap-20">
+      <main className="p-6 flex flex-col items-center gap-15">
         <SearchInput
           query={query}
           setQuery={setQuery}
@@ -62,10 +62,12 @@ export const Home = () => {
           results.length === 0 && (
             <h1 className="text-lg">Découvrez les artisans autour de vous !</h1>
           )}
-        {Array.isArray(results) &&
-          results.map((listing) => (
-            <ArtisanCard key={listing.id} data={listing} />
-          ))}
+        <div className="flex flex-col gap-5">
+          {Array.isArray(results) &&
+            results.map((listing) => (
+              <ArtisanCard key={listing.id} data={listing} />
+            ))}
+        </div>
       </main>
     </>
   );

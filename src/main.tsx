@@ -13,7 +13,6 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Dashboard } from "./pages/Dashboard";
 import { DashboardAdmin } from "./pages/DashboardAdmin";
-import { Selection } from "./pages/Selection";
 import { CreateListing } from "./pages/CreateListing";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { SpecialityProvider } from "./context/SpecialityContext";
@@ -54,16 +53,13 @@ const router = createBrowserRouter([
       {
         element: <RequireAuth />,
         children: [
-          { path: "create-annonce", element: <CreateListing /> },
-          { path: "dashboard/artisan", element: <Dashboard /> },
+          { path: "create", element: <CreateListing /> },
+          { path: "dashboard", element: <Dashboard /> },
         ],
       },
       {
         element: <RequireRole allowedRoles={["admin"]} />,
-        children: [
-          { path: "selection", element: <Selection /> },
-          { path: "dashboard/admin", element: <DashboardAdmin /> },
-        ],
+        children: [{ path: "moderation", element: <DashboardAdmin /> }],
       },
     ],
   },
